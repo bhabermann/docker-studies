@@ -1,0 +1,48 @@
+# Build image
+FROM php:8.1-cli AS build
+
+# Set work directory
+WORKDIR /var/www
+
+# Install zip lib
+RUN apt update && \
+    apt install libzip-dev -y && \
+    apt clean && \
+    docker-php-ext-install zip
+
+# Install composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php && \
+    php -r "unlink('composer-setup.php');"
+
+# Install Laravel
+RUN php composer.phar create-project --prefer-dist laravel/laravel laravel
+
+# Prod image
+FROM php:8.1-fpm-alpine
+
+# Set work directory
+WORKDIR /var/www
+
+# Remove html folder
+RUN rm -rf /var/www/html
+
+# Select files from build stage to this stage
+COPY --from=build /var/www/laravel .
+
+# Allow apine to execute commands inside www folder
+RUN chown -R www-data:www-data /var/www
+
+# Expose PHP port ~over~ 9000
+EXPOSE 9000
+
+# Execute PHP
+CMD [ "php-fpm" ]
+
+# Will always be executed
+# Start laravel server
+# ENTRYPOINT [ "php", "laravel/artisan", "serve" ]
+
+# May be replaced with commands in command line
+# Enable laravel to be accessed by host
+# CMD [ "--host=0.0.0.0" ]

@@ -4,7 +4,7 @@
 ## Commands
 Build image
 ```bash
-docker build -t [docker-user]/php8-laravel:[tag] .
+docker build -t [docker-user]/php8-laravel:latest .
 ```
 
 Run image
@@ -14,5 +14,15 @@ docker run --rm -d -p 8000:8000 --name laravel [docker-user]/php8-laravel;
 
 Push image
 ```bash
-docker push [docker-user]/php8-laravel:[tag]
+docker push [docker-user]/php8-laravel:latest
+```
+
+Build prod image
+```bash
+docker build -t [docker-user]/php8-laravel:prod . -f Dockerfile.prod
+```
+
+Push prod image
+```bash
+docker push [docker-user]/php8-laravel:prod
 ```
