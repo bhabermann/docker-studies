@@ -1,0 +1,16 @@
+FROM nginx:1.25.2-alpine
+# 1.15.0-alpine
+
+# Replace default.conf with nginx.conf
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d
+
+# Create laravel/public directory then a index.php file
+RUN mkdir /var/www/laravel/public -p && \
+    touch /var/www/laravel/public/index.php
+
+# COPY html /usr/share/nginx/html
+
+# ENTRYPOINT ["/docker-entrypoint.sh"]
+
+# CMD [ "nginx" "-g" "daemon off;" ]
