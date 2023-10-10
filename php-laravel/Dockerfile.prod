@@ -30,6 +30,9 @@ RUN rm -rf /var/www/html
 # Select files from build stage to this stage
 COPY --from=build /var/www/laravel .
 
+# Create a symbolik link
+RUN ln -s public html
+
 # Allow apine to execute commands inside www folder
 RUN chown -R www-data:www-data /var/www
 
