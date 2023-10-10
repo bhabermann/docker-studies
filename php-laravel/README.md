@@ -2,17 +2,17 @@
 > Project to practice writing dockerfile
 
 ## Commands
-Build image
+Create network
+```bash
+docker network create laravel-network
+```
+
+Build laravel image
 ```bash
 docker build -t [docker-user]/php8-laravel:latest .
 ```
 
-Run image
-```bash
-docker run --rm -d -p 8000:8000 --name laravel [docker-user]/php8-laravel;
-```
-
-Push image
+Push laravel image
 ```bash
 docker push [docker-user]/php8-laravel:latest
 ```
@@ -25,4 +25,24 @@ docker build -t [docker-user]/php8-laravel:prod . -f Dockerfile.prod
 Push prod image
 ```bash
 docker push [docker-user]/php8-laravel:prod
+```
+
+Run laravel image
+```bash
+docker run --rm -d --name laravel --network laravel-network [docker-user]/php8-laravel:prod;
+```
+
+Build Nginx image
+```bash
+docker build -t [docker-user]/php8-laravel:nginx . -f Dockerfile.nginx
+```
+
+Push Nginx image
+```bash
+docker push [docker-user]/php8-laravel:nginx
+```
+
+Build Nginx image
+```bash
+docker run --rm -d --name laravel --network laravel-network -p 8080:80 [docker-user]/php8-laravel:nginx;
 ```

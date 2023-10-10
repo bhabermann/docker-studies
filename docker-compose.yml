@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  
+  laravel:
+    image: bhabermann/php8-laravel:prod
+    container_name: laravel
+    networks:
+      - laravel-network
+
+  nginx:
+    image: bhabermann/php8-laravel:nginx
+    container_name: laravel-nginx
+    networks:
+      - laravel-network
+    ports:
+      - "8080:80"
+
+networks:
+  laravel-network:
+    driver: bridge
