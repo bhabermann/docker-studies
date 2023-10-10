@@ -1,0 +1,17 @@
+# Arquivos de configuração
+.env
+*.md
+Dockerfile
+docker-compose.yml
+
+# Pastas de desenvolvimento
+node_modules/
+npm-debug.log
+
+# Arquivos de compilação
+/dist
+/build
+
+# Outros arquivos de build
+*.log
+*.swp
