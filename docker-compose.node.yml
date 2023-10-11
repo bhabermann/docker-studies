@@ -5,13 +5,17 @@ services:
   db:
     image: mysql:5.7
     command: --innodb-use-native-aio=0
-    container_name: db
+    container_name: nodedb
     restart: always
     tty: true
     volumes:
-      - ./mysql-data:var/lib/mysql
-
+      - ./mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    networks:
+      - node-network
 
 networks:
-  laravel-network:
+  node-network:
     driver: bridge
