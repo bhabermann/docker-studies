@@ -4,7 +4,7 @@ const port = 3000
 
 const mysql = require('mysql')
 const db_config = {
-    host: 'db',
+    host: 'nodedb',
     user: 'root',
     database: 'nodedb'
 }
