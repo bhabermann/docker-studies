@@ -13,3 +13,7 @@ Will always rebuild before starting containers
 docker compose up -d --build
 ```
 
+```mysql
+create table people(id int not null auto_increment, name varchar(255), primary key(id));
+```
+
