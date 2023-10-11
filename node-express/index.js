@@ -9,7 +9,7 @@ const db_config = {
     database: 'nodedb'
 }
 const connection = mysql.createConnection(db_config)
-const sql = `INSERT INTO people(name) values ('Thor')`
+const sql = `INSERT INTO people(name) values ('Hella')`
 connection.query(sql)
 connection.end()
 
