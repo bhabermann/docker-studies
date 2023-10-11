@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql-data:var/lib/mysql
+
+
+networks:
+  laravel-network:
+    driver: bridge
