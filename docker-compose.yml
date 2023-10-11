@@ -1,14 +1,20 @@
 version: '3'
 
 services:
-  
+
   laravel:
+    build:
+      context: ./php-laravel
+      dockerfile: Dockerfile.prod
     image: bhabermann/php8-laravel:prod
     container_name: laravel
     networks:
       - laravel-network
 
   nginx:
+    build:
+      context: ./php-laravel
+      dockerfile: Dockerfile.nginx
     image: bhabermann/php8-laravel:nginx
     container_name: laravel-nginx
     networks:
