@@ -13,9 +13,7 @@ services:
     volumes:
       - ./node-express:/usr/src/app
     tty: true
-    ports:
-      - "3000:3000"
-    depends_on: 
+    depends_on:
       - nodedb
 
   nodedb:
@@ -31,6 +29,17 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
     networks:
       - node-network
+
+  nodenginx:
+    build:
+      context: nginx-reverse-proxy
+    container_name: nodenginx
+    networks:
+      - node-network
+    ports:
+      - "80:80"
+    depends_on:
+      - nodeapp
 
 networks:
   node-network:
